@@ -42,5 +42,9 @@ namespace _360Appraisal.Models
         public string Description { get; set; }
         [InverseProperty("Topics")]
         public virtual Section Section { get; set; }        
-    }   
+    }  
+    public class Questions
+    {
+
+    }
 }
