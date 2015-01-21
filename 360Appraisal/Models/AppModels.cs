@@ -9,6 +9,7 @@ namespace _360Appraisal.Models
 {
     public class SectionViewModel
     {
+        [Required]
         public string Description { get; set; }
     }
 
@@ -37,25 +38,61 @@ namespace _360Appraisal.Models
 
     public class Section : Base
     {
+        [Required]
         public string Description { get; set; }
-        [InverseProperty("Section")]
+
         public ICollection<Topic> Topics { get; set; }
     }
 
     public class Topic : Base
     {
+        [Required]
         public string Description { get; set; }
-        [InverseProperty("Topics")]
+
+        [Required]
         public virtual Section Section { get; set; }
-        [InverseProperty("Topic")]
+
         public ICollection<Question> Questions { get; set; }
     }
 
     public class Question : Base
-    {
+    {      
+        [Required]
         public string Text { get; set; }
-        [InverseProperty("Questions")]
-        public virtual Topic Topic { get; set; }
+        [Required]
+        public virtual Topic Topic { get; set; }        
     }
 
+    public class Feedback : Base
+    {       
+        [Required]
+        [MinLength(4)]
+        [MaxLength(6)]
+        public string ReviewerID { get; set; }
+        [Required]
+        [MinLength(4)]
+        [MaxLength(6)]
+        public string UserID { get; set; }
+        [Required]
+        public int Total { get; set; }
+        [Required]
+        public int Count { get; set; }
+        [Required]
+        public bool IsCompleted { get; set; }
+        [Required]
+        public string FinancialYear { get; set; }
+        public string Comments { get; set; }
+
+        public ICollection<Score> Scores { get; set; }
+    }
+
+    public class Score : Base
+    {
+        [Required]
+        public virtual Question Question { get; set; }           
+        [Required]
+        public int Points { get; set; }
+        [Required]
+        public virtual Feedback Feedback { get; set; }
+    }   
 }
