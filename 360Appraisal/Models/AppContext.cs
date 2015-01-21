@@ -10,8 +10,11 @@ namespace _360Appraisal.Models
     public class AppContext : DbContext
     {
         public AppContext() : base("DefaultConnection") { }
+
         public DbSet<Section> Sections { get; set; }
-        public DbSet<Topic> Topics { get; set; }   
+        public DbSet<Topic> Topics { get; set; }
+        public DbSet<Question> Questions { get; set; }
+
         private void BeforeSave()
         {
             foreach (var entry in ChangeTracker.Entries())
@@ -25,6 +28,7 @@ namespace _360Appraisal.Models
                         entity.CreatedAt = DateTime.Now;
                         entity.UpdatedAt = DateTime.Now;
                         entity.ActiveFlag = true;
+                        entity.Key = Guid.NewGuid().ToString();
                     }
                     else if (entry.State == EntityState.Modified)
                     {

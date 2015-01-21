@@ -7,6 +7,11 @@ using System.Web;
 
 namespace _360Appraisal.Models
 {
+    public class SectionViewModel
+    {
+        public string Description { get; set; }
+    }
+
     public class Base
     {
         [Required]
@@ -41,6 +46,16 @@ namespace _360Appraisal.Models
     {
         public string Description { get; set; }
         [InverseProperty("Topics")]
-        public virtual Section Section { get; set; }        
-    }   
+        public virtual Section Section { get; set; }
+        [InverseProperty("Topic")]
+        public ICollection<Question> Questions { get; set; }
+    }
+
+    public class Question : Base
+    {
+        public string Text { get; set; }
+        [InverseProperty("Questions")]
+        public virtual Topic Topic { get; set; }
+    }
+
 }
