@@ -42,6 +42,7 @@ namespace _360Appraisal.Models
     {
         [Required]
         public string Description { get; set; }
+
         [Required]
         public virtual Section Section { get; set; }
 
@@ -60,11 +61,11 @@ namespace _360Appraisal.Models
     {       
         [Required]
         [MinLength(4)]
-        [MinLength(6)]
+        [MaxLength(6)]
         public string ReviewerID { get; set; }
         [Required]
         [MinLength(4)]
-        [MinLength(6)]
+        [MaxLength(6)]
         public string UserID { get; set; }
         [Required]
         public int Total { get; set; }
@@ -87,5 +88,6 @@ namespace _360Appraisal.Models
         public int Points { get; set; }
         [Required]
         public virtual Feedback Feedback { get; set; }
-    }    
+    }   
+
 }
