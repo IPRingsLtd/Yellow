@@ -22,6 +22,11 @@ namespace _360Appraisal.Models
 
                     if (entry.State == EntityState.Added)
                     {
+                        if (String.IsNullOrWhiteSpace(entity.Key))
+                        {
+                            entity.Key = Guid.NewGuid().ToString();
+                        }
+
                         entity.CreatedAt = DateTime.Now;
                         entity.UpdatedAt = DateTime.Now;
                         entity.ActiveFlag = true;
