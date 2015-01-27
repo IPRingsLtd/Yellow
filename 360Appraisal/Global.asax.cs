@@ -15,7 +15,7 @@ namespace _360Appraisal
     {
         protected void Application_Start()
         {
-            Database.SetInitializer(new AppContextInitializer());
+            Database.SetInitializer(new AppContextInitializer(new AppContext()));
 
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);

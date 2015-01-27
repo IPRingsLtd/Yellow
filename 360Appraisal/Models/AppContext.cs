@@ -10,8 +10,13 @@ namespace _360Appraisal.Models
     public class AppContext : DbContext
     {
         public AppContext() : base("DefaultConnection") { }
+
         public DbSet<Section> Sections { get; set; }
-        public DbSet<Topic> Topics { get; set; }   
+        public DbSet<Topic> Topics { get; set; }
+        public DbSet<Question> Questions { get; set; }
+        public DbSet<Score> Scores { get; set; }
+        public DbSet<Feedback> Feedbacks { get; set; }
+
         private void BeforeSave()
         {
             foreach (var entry in ChangeTracker.Entries())
@@ -49,8 +54,12 @@ namespace _360Appraisal.Models
             return await base.SaveChangesAsync();
         }
     }
-    public class AppContextInitializer : DropCreateDatabaseIfModelChanges<AppContext>
-    { 
 
+    public class AppContextInitializer : DropCreateDatabaseIfModelChanges<AppContext>
+    {
+        public AppContextInitializer(AppContext context)
+        {
+            //context.Database.CreateIfNotExists();
+        }
     }
 }

@@ -75,7 +75,7 @@ namespace _360Appraisal.Models
         public bool IsCompleted { get; set; }
         [Required]
         public string FinancialYear { get; set; }
-        public virtual string Comments { get; set; }
+        public string Comments { get; set; }
 
         public ICollection<Score> Scores { get; set; }
     }
