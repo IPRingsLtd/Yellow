@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using _360Appraisal.Models;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Mvc;
-
-using _360Appraisal.Models;
 
 namespace _360Appraisal.Controllers
 {
@@ -132,6 +127,14 @@ namespace _360Appraisal.Controllers
 
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
 
         private bool SectionExists(string id)
         {
