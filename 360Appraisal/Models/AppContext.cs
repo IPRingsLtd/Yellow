@@ -35,6 +35,7 @@ namespace _360Appraisal.Models
                         entity.CreatedAt = DateTime.Now;
                         entity.UpdatedAt = DateTime.Now;
                         entity.ActiveFlag = true;
+                        entity.Key = Guid.NewGuid().ToString();
                     }
                     else if (entry.State == EntityState.Modified)
                     {
@@ -59,7 +60,7 @@ namespace _360Appraisal.Models
     {
         public AppContextInitializer(AppContext context)
         {
-            //context.Database.CreateIfNotExists();
+            
         }
     }
 }

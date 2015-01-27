@@ -50,7 +50,7 @@ namespace _360Appraisal.Models
     }
 
     public class Question : Base
-    {
+    {      
         [Required]
         public string Text { get; set; }
         [Required]
@@ -89,5 +89,4 @@ namespace _360Appraisal.Models
         [Required]
         public virtual Feedback Feedback { get; set; }
     }   
-
 }

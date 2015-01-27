@@ -7,22 +7,21 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-
 using _360Appraisal.Models;
 
 namespace _360Appraisal.Controllers
 {
-    public class SectionsController : Controller
+    public class TestSectionsController : Controller
     {
         private AppContext db = new AppContext();
 
-        // GET: /Sections/
+        // GET: TestSections
         public async Task<ActionResult> Index()
         {
             return View(await db.Sections.ToListAsync());
         }
 
-        // GET: /Sections/Details/5
+        // GET: TestSections/Details/5
         public async Task<ActionResult> Details(string id)
         {
             if (id == null)
@@ -37,13 +36,13 @@ namespace _360Appraisal.Controllers
             return View(section);
         }
 
-        // GET: /Sections/Create
+        // GET: TestSections/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: /Sections/Create
+        // POST: TestSections/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -52,11 +51,7 @@ namespace _360Appraisal.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Sections.Add(new Section
-                {
-                    Description = section.Description
-                });
-
+                db.Sections.Add(new Section() { Description = section.Description });
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
@@ -64,7 +59,7 @@ namespace _360Appraisal.Controllers
             return View(section);
         }
 
-        // GET: /Sections/Edit/5
+        // GET: TestSections/Edit/5
         public async Task<ActionResult> Edit(string id)
         {
             if (id == null)
@@ -76,35 +71,26 @@ namespace _360Appraisal.Controllers
             {
                 return HttpNotFound();
             }
-            return View(new SectionEditViewModel(section));
+            return View(section);
         }
 
-        // POST: /Sections/Edit/5
+        // POST: TestSections/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Key,Description")] SectionEditViewModel section)
+        public async Task<ActionResult> Edit([Bind(Include = "Key,Description,CreatedAt,UpdatedAt,TimeStamp,ActiveFlag")] Section section)
         {
             if (ModelState.IsValid)
             {
-                var editSection = await db.Sections.FindAsync(section.Key);
-
-                if (editSection == null)
-                {
-                    return HttpNotFound();
-                }
-
-                editSection.Description = section.Description;
-
-                db.Entry(editSection).State = EntityState.Modified;
+                db.Entry(section).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             return View(section);
         }
 
-        // GET: /Sections/Delete/5
+        // GET: TestSections/Delete/5
         public async Task<ActionResult> Delete(string id)
         {
             if (id == null)
@@ -119,7 +105,7 @@ namespace _360Appraisal.Controllers
             return View(section);
         }
 
-        // POST: /Sections/Delete/5
+        // POST: TestSections/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(string id)
@@ -128,15 +114,15 @@ namespace _360Appraisal.Controllers
             db.Sections.Remove(section);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
-
-
         }
 
-
-        private bool SectionExists(string id)
+        protected override void Dispose(bool disposing)
         {
-            return db.Sections.Count(e => e.Key == id) > 0;
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }
-
