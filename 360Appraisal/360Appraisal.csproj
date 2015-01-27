@@ -123,6 +123,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Api\SectionController.cs" />
+    <Compile Include="Areas\Api\TopicController.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
     <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
     <Compile Include="Areas\HelpPage\Controllers\HelpController.cs" />
@@ -161,6 +163,7 @@
     <Compile Include="Models\AppContext.cs" />
     <Compile Include="Models\AppModels.cs" />
     <Compile Include="Models\ViewModels.cs" />
+    <Compile Include="Models\WebApiModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
