@@ -1,0 +1,31 @@
+﻿﻿@model _360Appraisal.Models.LoginViewModel
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Login</h2>
+
+@using (@Html.BeginForm("Login", "Home", FormMethod.Post, new { autocomplete = "off", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="login-form-control">
+        @Html.TextBoxFor(m => m.UserName, new { placeholder = "username", ng_model = "lCtrl.username", required = "required" })
+    </div>
+    <div class="login-form-control">
+        @Html.PasswordFor(m => m.Password, new { placeholder = "password and hit enter", required = "required" })
+    </div>
+    <div class="login-form-control stay-signed-in">
+        @Html.CheckBoxFor(m => m.RememberMe, new { ng_model = "lCtrl.rememberMe" })
+        @Html.LabelFor(m => m.RememberMe, "stay signed in")
+    </div>
+
+
+    <div class="login-form-control">
+        @Html.HiddenFor(m => m._ReturnUrl, new { @readonly = "readonly" })
+        <input type="submit" />
+    </div>
+
+    
+}

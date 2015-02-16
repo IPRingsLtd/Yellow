@@ -7,6 +7,38 @@ using System.Web.Mvc;
 
 namespace _360Appraisal.Models
 {
+    public class Department
+    {
+        public string Code { get; set; }
+        public string Name { get; set; }
+    }
+    public class Position
+    {
+        public string Code { get; set; }
+        public string Name { get; set; }
+    }
+
+    
+    public class TResponse<T>
+    {
+        public string Type { get; set; }
+        public string Classname { get; set; }
+        public Exception Error { get; set; }
+        public string StatusCode { get; set; }
+        public string RequestUrl { get; set; }
+    }
+
+    public class ResponseList<T> : TResponse<T>
+    {
+        public List<T> List { get; set; }
+        public int Count { get; set; }
+    }
+
+    public class ResponseValue<T> : TResponse<T>
+    {
+        public T Value { get; set; }
+    }
+
     public class SectionViewModel
     {
         public SectionViewModel() { }
@@ -63,5 +95,25 @@ namespace _360Appraisal.Models
 
         [Required]
         public string Key { get; set; }
+    }
+
+    public class BaseLoginViewModel
+    {
+        [Required]
+        [Display(Name = "Employee Code")]
+        public string UserName { get; set; }
+
+        [Required]
+        [Display(Name = "Password")]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+    }
+
+    public class LoginViewModel : BaseLoginViewModel
+    {
+        [Display(Name = "Remember Me")]
+        public bool RememberMe { get; set; }
+
+        public string _ReturnUrl { get; set; }
     }
 }
